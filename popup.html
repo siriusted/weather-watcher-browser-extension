@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title> Weather Watcher </title>
+  <link href="css/popup.css" rel="stylesheet">
+  <link href="css/owfont-regular.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <main id="app">
+    <section class="flex-child">
+      <h1>Weather Watcher</h1>
+
+      <template v-if="isAvailable">
+      <h3>{{ location }}</h3>
+        <p>
+          <i class="owf owf-3x owf-pull-left owf-border" :class="iconClass"></i>
+          <span id="temp">{{temperature}}
+            <sup>°C</sup>
+          </span>
+          <br>
+          {{description}}
+        </p>
+        <ul style="list-style: none; padding-left: 0">
+          <li>Min Temperature: <span>{{minTemp}}</span>°</li>
+          <li>Max Temperature: <span>{{maxTemp}}</span>°</li>
+          <li>Humidity: {{humidity}}%</li>
+          <li>Wind Speed: {{windSpeed}}&nbsp;km/h</li>
+        </ul>
+      </template>
+      <template v-else>
+        <p> {{errorMessage}} </p>
+      </template>
+    </section>
+  </main>
+  <script src="scripts/vue.min.js"></script>
+  <script src="scripts/browser-polyfill.min.js"></script>
+  <script src="scripts/popup.js"></script>
+  <script>
+  </script>
+</body>
+
+</html>
