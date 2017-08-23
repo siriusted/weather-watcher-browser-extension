@@ -1,3 +1,6 @@
+/*new Vue instance for the application
+*template is mounted from in DOM declaration id = app
+*/
 var app = new Vue({
   el: '#app',
   data: {
@@ -6,6 +9,7 @@ var app = new Vue({
     errorMessage: '',
     weatherData: {}
   },
+  //computed properties for weather information displayed
   computed: {
     location: function() {
       return this.weatherData.name + ', ' + this.weatherData.sys.country;
@@ -33,6 +37,7 @@ var app = new Vue({
     }
 
   },
+  //lifecycle hook to call a method which gets user current position
   created: function() {
     this.getPosition();
   },
@@ -43,6 +48,7 @@ var app = new Vue({
     }
   },
   methods: {
+    //accesses the geolocation API and on success calls fetchData() to get weather data
     getPosition: function() {
       var self = this;
       if (!navigator.geolocation) {
@@ -50,13 +56,16 @@ var app = new Vue({
         return;
       }
 
+      //success callback for getCurrentPosition
       function success(pos) {
+        //build request link from position coordinates
         const link =
           'https://api.openweathermap.org/data/2.5/weather?APPID=adfb4f4555c4ea1714b082c7f54477ee&units=metric' +
           '&lat=' + pos.coords.latitude + '&lon=' + pos.coords.longitude;
         self.fetchData(link);
       }
 
+      //error callback for getCurrentPosition
       function error() {
         self.errorMessage = 'Unable to retrieve your location';
       }
@@ -64,6 +73,7 @@ var app = new Vue({
       navigator.geolocation.getCurrentPosition(success, error);
     },
 
+    //method to fetch data using the fetch API
     fetchData: function(link) {
       var self = this;
       fetch(link)

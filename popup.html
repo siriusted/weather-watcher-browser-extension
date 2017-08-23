@@ -13,6 +13,7 @@
     <section class="flex-child">
       <h1>Weather Watcher</h1>
 
+      <!-- Templates to show sections based on availability of weather data -->
       <template v-if="isAvailable">
       <h3>{{ location }}</h3>
         <p>
@@ -21,7 +22,7 @@
             <sup>°C</sup>
           </span>
           <br>
-          {{description}}
+          {{description | capitalize}}
         </p>
         <ul style="list-style: none; padding-left: 0">
           <li>Min Temperature: <span>{{minTemp}}</span>°</li>
